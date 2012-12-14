@@ -1,13 +1,95 @@
 <head>
-  <title>PongElo</title>
+  <title>ladder</title>
 </head>
 
 <body>
   {{> hello}}
+  {{> rankings}}
+  {{> matches}}
+  
 </body>
 
 <template name="hello">
-  <h1>Hello World!</h1>
+  <h1>Hello World! Ahh, whatever1</h1>
   {{greeting}}
   <input type="button" value="Click" />
+</template>
+
+<template name="rankings">
+    <h1>Rankings</h1>
+    <ol>
+    {{#each players}}
+        <li>{{formatScore score}} {{name}}</li>
+    {{/each}}
+    </ol>
+    <input type="text"> <button id="addPlayer">Add Player</button>
+</template>
+
+<template name="matches">
+    <h1>Matches</h1>
+    <table>
+        <tr>
+            <td colspan="4">
+               Singles:
+               <select id="winner">
+                    {{> players}}    
+                </select>
+                <br>
+                Doubles:
+                <select id="winner2">
+                    {{> players}}    
+                </select>
+            </td>
+            <td colspan="4">
+                <select id="loser">
+                    {{> players}}    
+                </select>
+                <br>
+                <select id="loser2">
+                    {{> players}}    
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="8">
+                <button id="addMatch">Add Match!</button>
+            </td>
+        </tr>
+        <tr>
+            <th colspan="4">Winner</th>
+            <th colspan="4">Loser</th>
+        </tr>
+        {{#each matches}}
+            {{#if winner2}}
+                <tr>
+                    <td>{{winner}} & {{winner2}}</td>
+                    <td>{{formatScore wOldScore}} - {{formatScore wOldScore2}}</td>
+                    <td>{{formatPercent wChance}}</td>
+                    <td>{{formatScore wNewScore}} - {{formatScore wNewScore2}}</td>
+                    <td>{{loser}} & {{loser2}}</td>
+                    <td>{{formatScore lOldScore}} - {{formatScore lOldScore2}}</td>
+                    <td>{{formatPercent lChance}}</td>
+                    <td>{{formatScore lNewScore}} - {{formatScore lNewScore2}}</td>
+                </tr>
+            {{else}}
+                <tr>
+                    <td>{{winner}}</td>
+                    <td>{{formatScore wOldScore}}</td>
+                    <td>{{formatPercent wChance}}</td>
+                    <td>{{formatScore wNewScore}}</td>
+                    <td>{{loser}}</td>
+                    <td>{{formatScore lOldScore}}</td>
+                    <td>{{formatPercent lChance}}</td>
+                    <td>{{formatScore lNewScore}}</td>
+                </tr>
+            {{/if}}
+        {{/each}}
+    </table>
+</template>
+
+<template name="players">
+    <option></option>
+    {{#each players}}
+        <option value="{{name}}">{{name}} - {{formatScore score}}</option>
+    {{/each}}
 </template>
