@@ -158,8 +158,47 @@ if (Meteor.isClient) {
       });
 
       $('select').val('');
+    },
+    'change select': function (e) {
+      
+      console.log('change select');
+
+      var $select = $(e.currentTarget),
+        val = $select.val(),
+        singlesValid = false,
+        doublesValid = false;
+      
+      if (val !== '') {
+        $select.addClass('temp');
+        $('select:not(.temp)')
+          .find('option[value="' + val + '"]')
+          .attr('disabled', true);
+
+        $select.removeClass('temp');
+
+
+        singlesValid = $('#winner').val().length && $('#loser').val().length;
+        doublesValid = ($('#winner2').val().length && $('#loser2').val().length)
+                        || ($('#winner2').val() === '' && $('#loser2').val() === '');
+        
+        if (singlesValid && doublesValid) {
+          $('#addMatch').removeAttr('disabled');
+        } else {
+          $('#addMatch').attr('disabled', true);
+        }
+
+        return;
+      }
+
+      resetEntry();
     }
   });
+
+  var resetEntry = function () {
+    $('select').val('');
+    $('option[disabled]').removeAttr('disabled');
+    $('#addMatch').attr('disabled', true);
+  }
 
   Template.players.players = function () {
     return Players.find({

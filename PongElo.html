@@ -1,5 +1,6 @@
 <head>
   <title>ladder</title>
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
 </head>
 
 <body>
@@ -10,7 +11,7 @@
 </body>
 
 <template name="hello">
-  <h1><span>Pong</span> @ Volusion</h1>
+  <h1><span>Pong</span> @ vol</h1>
   {{greeting}}
 </template>
 
@@ -61,38 +62,54 @@
                 {{> players}}    
             </select>
         </fieldset>
-        <button id="addMatch">Submit Results</button>
-            <ul>
+        <button id="addMatch" disabled="disabled">Submit Match Results</button>
+            <table class="results">
+                <thead>
+                    <tr>
+                        <th colspan="3">Victory</th>
+                        <th colspan="3">Defeat</th>
+                    </tr><tr>
+                        <th class="player">Player</th>
+                        <th class="rating">Old</th>
+                        <th class="rating">New</th>
+                        <th class="player">Player</th>
+                        <th class="rating">Old</th>
+                        <th class="rating">New</th>
+                    </tr>
+                </thead><tbody>
                 {{#each matches}}
                     {{#if winner2}}
-                        <li>
-                            <table><tbody>
-                                <tr><td>{{winner}}<br />{{winner2}}</td></tr>
-                                <tr><td>{{formatScore wOldScore}}<br />{{formatScore wNewScore}}</td></tr>
-                                <tr><td>{{formatScore wOldScore2}}<br />{{formatScore wNewScore2}}</td></tr>
-                            </tbody></table>
-                            <div>{{formatPercent wChance}} - {{formatPercent lChance}}</div>
-                            <table><tbody>
-                                <tr><td>{{loser}}<br />{{loser2}}</td></tr>
-                                <tr><td>{{formatScore lOldScore}}<br />{{formatScore lNewScore}}</td></tr>
-                                <tr><td>{{formatScore lOldScore2}}<br />{{formatScore lNewScore2}}</td></tr>
-                            </tbody></table>
-                        </li>
+                        <tr class="doubles">
+                            <td class="player">
+                                {{winner}}
+                                <br>
+                                {{winner2}}
+                            </td>
+                            <td class="rating">
+                                {{formatScore wOldScore}}<br />{{formatScore wOldScore2}}
+                            </td>
+                            <!-- <td>{{formatPercent wChance}}</td> -->
+                            <td class="rating">
+                                {{formatScore wNewScore}}
+                                <br />
+                                {{formatScore wNewScore2}}
+                            </td>
+                            <td class="player">
+                                {{loser}}
+                                <br>
+                                {{loser2}}
+                            </td>
+                            <td class="rating">
+                                {{formatScore lOldScore}}
+                                {{formatScore lOldScore2}}
+                            </td>
+                            <!-- <td>{{formatPercent lChance}}</td> -->
+                            <td class="rating">
+                                {{formatScore lNewScore}}
+                                <br>
+                                {{formatScore lNewScore2}}
+                            </td>
                     {{else}}
-                        <table class="results">
-                        <thead>
-                            <tr>
-                                <th colspan="3">Victory</th>
-                                <th colspan="3">Defeat</th>
-                            </tr><tr>
-                                <th class="player">Player</th>
-                                <th class="rating">Old</th>
-                                <th class="rating">New</th>
-                                <th class="player">Player</th>
-                                <th class="rating">Old</th>
-                                <th class="rating">New</th>
-                            </tr>
-                        </thead><tbody>
                         <tr class="singles">
                             <td class="player">{{winner}}</td>
                             <td class="rating">{{formatScore wOldScore}}</td>
@@ -103,10 +120,9 @@
                             <!-- <td>{{formatPercent lChance}}</td> -->
                             <td class="rating">{{formatScore lNewScore}}</td>
                         </tr>
-                        </tbody></table>
                     {{/if}}
                 {{/each}}
-            </ul>
+            </tbody></table>
     </div>
 </template>
 

@@ -32,12 +32,13 @@ body * {
 
 h1 {
   font-weight: 200;
+  font-size: 5rem;
 }
 h1 span {
   font-weight: 600;
 }
 h2 {
-  font-weight: 200;
+  font-weight: 3rem;
 }
 
 table {
@@ -68,7 +69,8 @@ input[type="text"] {
   padding: 0.4rem;
 }
 select {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
+  width: 125px;
 }
 button {
   background-color: rgba(204, 204, 221, 1);
@@ -114,14 +116,23 @@ div.matches button {
 
 table.results {
   table-layout: fixed;
+  box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.4);
   width: 100%;
+}
+
+table.results tr td {
+  
 }
 table.results th {
   font-weight: 400;
-  padding: 0px;
+  padding: 5px 0 5px;
+  background-color: rgba(255, 255, 255, 0.02);
 }
 table.results td {
-  padding: 0px;
+  padding: 5px 0 5px;
+  font-size: 1.2rem;
+  background-color: rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0px 1px rgba(255, 255, 255, 0.1), inset 0px -1px rgba(0, 0, 0, 0.9);
 }
 
 /* ladder and player form */
