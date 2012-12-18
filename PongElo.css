@@ -1,1 +1,206 @@
 /* CSS declarations go here */
+
+/**
+ * section: root
+ * minimum specificity for document-scoped styles
+ */
+
+html {
+  font-size: 10px;
+  line-height: normal;
+}
+body {
+  background-color: #222;
+  box-sizing: border-box;
+  color: #eef;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 1.6rem;
+  margin: 0px auto;
+  padding: 0px;
+  text-align: center;
+  text-transform: lowercase;
+  width: 320px;
+}
+body * {
+  box-sizing: border-box;
+}
+
+/**
+ * section: generic
+ * low specificity for common elements and classes
+ */
+
+h1 {
+  font-weight: 200;
+}
+h1 span {
+  font-weight: 600;
+}
+h2 {
+  font-weight: 200;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+ul, ol {
+  list-style: none outside none;
+  margin: 0px;
+  padding: 0px;
+}
+
+ul.inline {
+}
+ul.inline li {
+  display: inline-block;
+}
+
+input {
+  font-size: 1.8rem;
+}
+input[type="text"] {
+  background: none rgb(255, 255, 255);
+  border: 0px none;
+  border-radius: 2px;
+  font: 1.8rem/2.4rem 'Source Sans Pro', sans-serif;
+  margin: 0px;
+  padding: 0.4rem;
+}
+select {
+  font-size: 1.8rem;
+}
+button {
+  background-color: rgba(204, 204, 221, 1);
+  background-image: -webkit-linear-gradient(top, rgba(221, 221, 238, 1), rgba(204, 204, 221, 1));
+  border: 1px solid rgba(187, 187, 204, 1);
+  border-radius: 2px;
+  color: 333;
+  cursor: pointer;
+  font: 600 1.4rem/2.8rem 'Source Sans Pro', sans-serif;
+  padding: 0px 0.8rem;
+  text-shadow: 0px 1px rgba(255, 255, 255, 0.8);
+  text-transform: lowercase;
+}
+
+/**
+ * section: specific
+ * high specificity for for individual instances
+ */
+
+/* match results and form */
+div.matches fieldset {
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 0px none;
+  border-radius: 2px;
+  box-shadow: inset 0px 1px rgba(255, 255, 255, 0.1), inset 0px -1px rgba(0, 0, 0, 0.9), 0px 0px 8px 1px rgba(0, 0, 0, 0.4);
+  display: inline-block;
+  margin: 0px;
+  padding: 0.8rem 0.4rem 1.2rem;
+  width: 150px;
+}
+div.matches fieldset legend {
+  text-align: left;
+}
+div.matches fieldset.losers {
+  margin-left: 20px;
+}
+div.matches fieldset.losers legend {
+  text-align: right;
+}
+div.matches button {
+  margin: 1.6rem 0px;
+}
+
+table.results {
+  table-layout: fixed;
+  width: 100%;
+}
+table.results th {
+  font-weight: 400;
+  padding: 0px;
+}
+table.results td {
+  padding: 0px;
+}
+
+/* ladder and player form */
+ol.ladder {
+  border-radius: 2px;
+  box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.4);
+  counter-reset: li;
+  padding-left: 60px;
+}
+
+ol.ladder ul.inline {
+  background-color: rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0px 1px rgba(255, 255, 255, 0.1), inset 0px -1px rgba(0, 0, 0, 0.9);
+  padding-left: 0px;
+  position: relative;
+  text-align: left;
+}
+ol.ladder ul.inline li {
+  padding: 0.7rem 0.8rem 0.9rem;
+  text-align: center;
+}
+ol.ladder ul.inline li.player {
+  width: 160px;
+}
+ol.ladder ul.inline li.rating {
+  width: 100px;
+}
+ol.ladder ul.inline::before {
+  background-color: rgba(255, 255, 255, 0.02);
+  box-shadow: inset 0px 1px rgba(255, 255, 255, 0.1), inset 0px -1px rgba(0, 0, 0, 0.9);
+  content: "#";
+  left: -60px;
+  padding: 0.7rem 0px 0.9rem;
+  position: absolute;
+  text-align: center;
+  top: 0px;
+  width: 60px;
+}
+
+ol.ladder ul.tr::before {
+  background-color: rgba(255, 255, 255, 0.04);
+  content: counter(li);
+  counter-increment: li;
+}
+ol.ladder li:nth-last-of-type(1) ul.tr {
+  border-radius: 0px 0px 2px 0px;
+}
+ol.ladder li:nth-last-of-type(1) ul.tr::before {
+  border-radius: 0px 0px 0px 2px;
+}
+
+ol.ladder ul.thead {
+  background-color: rgba(255, 255, 255, 0.02);
+  border-radius: 0px 2px 0px 0px;
+}
+ol.ladder ul.thead::before {
+  border-radius: 2px 0px 0px 0px;
+}
+
+div.player-form {
+  padding-bottom: 1.6rem;
+  position: relative;
+}
+div.player-form input {
+  padding-right: 36px;
+  width: 200px;
+}
+div.player-form button {
+  border-radius: 0px 2px 2px 0px;
+  cursor: pointer;
+  font-size: 0px;
+  line-height: 0px;
+  height: 3.2rem;
+  margin: 0px;
+  overflow: hidden;
+  padding: 0px;
+  position: absolute;
+  right: 60px;
+  text-indent: -10000rem;
+  top: 0px;
+  width: 3.2rem;
+}

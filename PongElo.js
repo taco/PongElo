@@ -111,7 +111,7 @@ if (Meteor.isClient) {
   Meteor.subscribe("players");
 
   Template.hello.greeting = function () {
-    return "Welcome to test.";
+    return "our very own little elo tracker. how cute.";
   };
 
   Template.hello.events({
@@ -138,10 +138,12 @@ if (Meteor.isClient) {
   });
 
   Template.matches.matches = function () {
-    return Matches.find({
+    var results = Matches.find({
       winner: {$ne: undefined},
       loser: {$ne: undefined}
     }, {sort: {t: -1}}).fetch();
+
+    return results.slice(0, 5);
   };
 
   Template.matches.events({

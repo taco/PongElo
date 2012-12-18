@@ -4,87 +4,110 @@
 
 <body>
   {{> hello}}
-  {{> rankings}}
   {{> matches}}
+  {{> rankings}}
   
 </body>
 
 <template name="hello">
-  <h1>Hello World! Ahh, whatever1</h1>
+  <h1><span>Pong</span> @ Volusion</h1>
   {{greeting}}
-  <input type="button" value="Click" />
 </template>
 
 <template name="rankings">
-    <h1>Rankings</h1>
-    <ol>
-    {{#each players}}
-        <li>{{formatScore score}} {{name}}</li>
-    {{/each}}
-    </ol>
-    <input type="text"> <button id="addPlayer">Add Player</button>
+    <div class="rankings">
+        <h2>Ladder</h2>
+        <ol class="ladder">
+            <ul class="inline thead">
+                <li class="player">
+                    <span>Player</span>
+                </li><li class="rating">
+                    <span>Rating</span>
+                </li>
+            </ul>
+            {{#each players}}
+                <li><ul class="inline tr">
+                    <li class="player">
+                        <span>{{name}}</span>
+                    </li><li class="rating">
+                        <span>{{formatScore score}}</span>
+                    </li>
+                </ul></li>
+            {{/each}}
+        </ol>
+        <p>Not on the list? Enter your name below</p>
+        <div class="player-form">
+            <input type="text" placeholder="name" />
+            <button id="addPlayer">add me!</button>
+        </div>
+    </div>
 </template>
 
 <template name="matches">
-    <h1>Matches</h1>
-    <table>
-        <tr>
-            <td colspan="4">
-               Singles:
-               <select id="winner">
-                    {{> players}}    
-                </select>
-                <br>
-                Doubles:
-                <select id="winner2">
-                    {{> players}}    
-                </select>
-            </td>
-            <td colspan="4">
-                <select id="loser">
-                    {{> players}}    
-                </select>
-                <br>
-                <select id="loser2">
-                    {{> players}}    
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="8">
-                <button id="addMatch">Add Match!</button>
-            </td>
-        </tr>
-        <tr>
-            <th colspan="4">Winner</th>
-            <th colspan="4">Loser</th>
-        </tr>
-        {{#each matches}}
-            {{#if winner2}}
-                <tr>
-                    <td>{{winner}} & {{winner2}}</td>
-                    <td>{{formatScore wOldScore}} - {{formatScore wOldScore2}}</td>
-                    <td>{{formatPercent wChance}}</td>
-                    <td>{{formatScore wNewScore}} - {{formatScore wNewScore2}}</td>
-                    <td>{{loser}} & {{loser2}}</td>
-                    <td>{{formatScore lOldScore}} - {{formatScore lOldScore2}}</td>
-                    <td>{{formatPercent lChance}}</td>
-                    <td>{{formatScore lNewScore}} - {{formatScore lNewScore2}}</td>
-                </tr>
-            {{else}}
-                <tr>
-                    <td>{{winner}}</td>
-                    <td>{{formatScore wOldScore}}</td>
-                    <td>{{formatPercent wChance}}</td>
-                    <td>{{formatScore wNewScore}}</td>
-                    <td>{{loser}}</td>
-                    <td>{{formatScore lOldScore}}</td>
-                    <td>{{formatPercent lChance}}</td>
-                    <td>{{formatScore lNewScore}}</td>
-                </tr>
-            {{/if}}
-        {{/each}}
-    </table>
+    <div class="matches">
+        <h2>Report</h2>
+        <fieldset class="winners">
+            <legend>Winners</legend>
+            <select id="winner">
+                {{> players}}    
+            </select><select id="winner2">
+                {{> players}}    
+            </select>
+        </fieldset><fieldset class="losers">
+            <legend>Losers</legend>
+            <select id="loser">
+                {{> players}}    
+            </select><select id="loser2">
+                {{> players}}    
+            </select>
+        </fieldset>
+        <button id="addMatch">Submit Results</button>
+            <ul>
+                {{#each matches}}
+                    {{#if winner2}}
+                        <li>
+                            <table><tbody>
+                                <tr><td>{{winner}}<br />{{winner2}}</td></tr>
+                                <tr><td>{{formatScore wOldScore}}<br />{{formatScore wNewScore}}</td></tr>
+                                <tr><td>{{formatScore wOldScore2}}<br />{{formatScore wNewScore2}}</td></tr>
+                            </tbody></table>
+                            <div>{{formatPercent wChance}} - {{formatPercent lChance}}</div>
+                            <table><tbody>
+                                <tr><td>{{loser}}<br />{{loser2}}</td></tr>
+                                <tr><td>{{formatScore lOldScore}}<br />{{formatScore lNewScore}}</td></tr>
+                                <tr><td>{{formatScore lOldScore2}}<br />{{formatScore lNewScore2}}</td></tr>
+                            </tbody></table>
+                        </li>
+                    {{else}}
+                        <table class="results">
+                        <thead>
+                            <tr>
+                                <th colspan="3">Victory</th>
+                                <th colspan="3">Defeat</th>
+                            </tr><tr>
+                                <th class="player">Player</th>
+                                <th class="rating">Old</th>
+                                <th class="rating">New</th>
+                                <th class="player">Player</th>
+                                <th class="rating">Old</th>
+                                <th class="rating">New</th>
+                            </tr>
+                        </thead><tbody>
+                        <tr class="singles">
+                            <td class="player">{{winner}}</td>
+                            <td class="rating">{{formatScore wOldScore}}</td>
+                            <!-- <td>{{formatPercent wChance}}</td> -->
+                            <td class="rating">{{formatScore wNewScore}}</td>
+                            <td class="player">{{loser}}</td>
+                            <td class="rating">{{formatScore lOldScore}}</td>
+                            <!-- <td>{{formatPercent lChance}}</td> -->
+                            <td class="rating">{{formatScore lNewScore}}</td>
+                        </tr>
+                        </tbody></table>
+                    {{/if}}
+                {{/each}}
+            </ul>
+    </div>
 </template>
 
 <template name="players">
